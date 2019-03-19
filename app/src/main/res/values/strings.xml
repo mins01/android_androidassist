@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android-Assist for Test</string>
+    <string name="accessibility_descripttion" >Assist test</string>
+    <string name="msg_active" >Already active!</string>
+    <string name="msg_activate" >Tap on \'Assist app\' and choose "Assist"</string>
+    <string name="assist_main_title" >Pickup text with assist</string>
+
+</resources>
