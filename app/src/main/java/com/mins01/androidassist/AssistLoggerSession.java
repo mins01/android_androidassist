@@ -11,6 +11,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AssistLoggerSession extends VoiceInteractionSession {
     public Context context=null;
@@ -20,8 +21,6 @@ public class AssistLoggerSession extends VoiceInteractionSession {
         super(context);
         this.context = context;
         alc.context = context;
-
-
         Log.v("@AssistLoggerSession","AssistLoggerSession");
     }
 
@@ -33,6 +32,7 @@ public class AssistLoggerSession extends VoiceInteractionSession {
     public void onHandleScreenshot(@Nullable Bitmap screenshot) {
         Log.v("@AssistLoggerSession","onHandleScreenshot");
         super.onHandleScreenshot(screenshot);
+        alc.onHandleScreenshot(screenshot);
     }
 
 
@@ -51,6 +51,7 @@ public class AssistLoggerSession extends VoiceInteractionSession {
 
         super.onHandleAssist(data, structure, content);
         Log.v("@onHandleAssist","tvTest clear");
+//        Toast.makeText(getContext(),"onHandleAssist",Toast.LENGTH_LONG).show();
         TextView tvTest = view_assist_main.findViewById(R.id.tvTest);
         tvTest.setText("");
 
@@ -58,7 +59,7 @@ public class AssistLoggerSession extends VoiceInteractionSession {
 //        lastStructure = structure;
 //        lastContent = content;
         View view_assist_main = getLayoutInflater().inflate(R.layout.assist_main,null);
-        alc.setAssistData(data, structure, content);
+        alc.onHandleAssist(data, structure, content);
         try {
 //            alc.onHandleAssist();
         } catch (Exception e) {

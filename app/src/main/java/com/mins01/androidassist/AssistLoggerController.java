@@ -1,19 +1,40 @@
 package com.mins01.androidassist;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.DownloadManager;
 import android.app.assist.AssistContent;
 import android.app.assist.AssistStructure;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mins01.java.PickupKeywords.TextInfo;
 import com.mins01.java.PickupKeywords.WordInfo;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 
 public class AssistLoggerController {
@@ -25,10 +46,17 @@ public class AssistLoggerController {
     public Context context;
     public AssistPickupKeywords apk = new AssistPickupKeywords();
     public View view_assist_main = null;
+    public Bitmap lastScreenshot;
+    public ArrayList<NodeInfo> lastNis = null;
+    public ArrayList<TextInfo> lastTis = null;
+    public ArrayList<WordInfo> lastWis = null;
     public AssistLoggerController(){
 
     }
-    public void setAssistData(@Nullable Bundle data, @Nullable AssistStructure structure, @Nullable AssistContent content){
+    public void onHandleScreenshot(Bitmap screenshot) {
+        this.lastScreenshot = screenshot;
+    }
+    public void onHandleAssist(@Nullable Bundle data, @Nullable AssistStructure structure, @Nullable AssistContent content){
         if(data==null){
             Log.v("@setAssistData","data is null");
         }else{
@@ -49,6 +77,8 @@ public class AssistLoggerController {
         this.content = content;
         if(structure != null){
             packagename = structure.getActivityComponent().getPackageName();
+            ((TextView)view_assist_main.findViewById(R.id.tvPackagename)).setText(packagename);
+            ((TextView)view_assist_main.findViewById(R.id.tvAppName)).setText(getAppName(packagename));
             Log.v("@setAssistData","packagename : "+packagename);
         }
 
@@ -64,7 +94,7 @@ public class AssistLoggerController {
     }
     public void onCreateContentView(View view_assist_main){
         this.view_assist_main = view_assist_main;
-        ((Button)view_assist_main.findViewById(R.id.buttonPickup)).setOnClickListener(
+        ((Button)view_assist_main.findViewById(R.id.btnPickup)).setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
@@ -80,11 +110,23 @@ public class AssistLoggerController {
                     }
                 }
         );
+        ((Button)view_assist_main.findViewById(R.id.btnSaveLog)).setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Log.v("@onClick",this.getClass().getName()+"."+new Object(){}.getClass().getEnclosingMethod().getName());
+                        saveLogInfo();
+                    }
+                }
+        );
     }
     public void actPickupKeyWords() throws Exception {
         ArrayList<NodeInfo> nis = getTextsFromStructure(structure);
         ArrayList<TextInfo> tis = apk.nodeInfoToTextInfo(nis);
         ArrayList<WordInfo> wis = apk.getWords(tis);
+        this.lastNis = nis;
+        this.lastTis = tis;
+        this.lastWis = wis;
         TextView tvTest = view_assist_main.findViewById(R.id.tvTest);
         tvTest.setText("");
         for(int i=0,m=nis.size();i<m;i++){
@@ -110,8 +152,156 @@ public class AssistLoggerController {
         }
     }
 
+    public String getAppName(String packagename) {
+//        final String packageName = "my.application.package"
+        PackageManager packageManager= context.getPackageManager();
+        String appName = null;
+        try {
+            appName = (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(packagename, PackageManager.GET_META_DATA));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            appName = "";
+        }
+        return appName;
+    }
+
+    /**
+     * write file
+     * @param data
+     */
+    private String writeToFile(String data,String filename) {
+        if(!isStoragePermissionGranted()){
+            Toast.makeText(context,"permission deny",Toast.LENGTH_LONG).show();
+            Log.e("@writeToFile","permission deny");
+        }
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+context.getPackageName());
+//        File dir = context.getFilesDir();
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        File file = new File(dir, filename);
+        OutputStream out = null;
+        try {
+            file.createNewFile();
+            out = new FileOutputStream(file);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(out);
+            outputStreamWriter.write(data);
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+            Log.v("@writeToFile","[Success] "+file.getAbsolutePath());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+        MediaScannerConnection.scanFile(context, new String[] {file.toString()}, null, null);
+//        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+Environment.getExternalStorageDirectory())));
+        return file.getAbsolutePath();
+    }
+
+    private String writeToFile(Bitmap bitmap, String filename) {
+        if(!isStoragePermissionGranted()){
+            Toast.makeText(context,"permission deny",Toast.LENGTH_LONG).show();
+            Log.e("@writeToFile","permission deny");
+        }
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS+"/"+context.getPackageName());
+//        File dir = context.getFilesDir();
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        File file = new File(dir, filename);
+        OutputStream out = null;
+
+        try
+        {
+            file.createNewFile();
+            out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                out.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        MediaScannerConnection.scanFile(context, new String[] {file.toString()}, null, null);
+        return file.getAbsolutePath();
+
+    }
 
 
+    private String arraylistToString(ArrayList xis){
+        if(xis==null){
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Object xi : xis)
+        {
+            sb.append(xi.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    public void saveLogInfo(){
 
+//        this.lastNis
+//        this.lastTis
+//        this.lastWis
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date d = new Date();
+        String filenamePrefix = "["+sdf.format(d)+"]["+packagename+"]";
+        String filename = "",path = "";
+        // nis
+        filename = filenamePrefix+"nis.txt";
+        Log.v("@saveLogInfo",filename);
+//        Log.v("@saveLogInfo",arraylistToString(lastNis));
+        path = writeToFile(arraylistToString(lastNis),filename);
+        Log.v("@saveLogInfo","save path: "+path);
+        // tis
+        filename = filenamePrefix+"tis.txt";
+        Log.v("@saveLogInfo",filename);
+//        Log.v("@saveLogInfo",arraylistToString(lastTis));
+        path = writeToFile(arraylistToString(lastTis),filename);
+        Log.v("@saveLogInfo","save path: "+path);
+        // wis
+        filename = filenamePrefix+"wis.txt";
+        Log.v("@saveLogInfo",filename);
+//        Log.v("@saveLogInfo",arraylistToString(lastWis));
+        path = writeToFile(arraylistToString(lastWis),filename);
+        Log.v("@saveLogInfo","save path: "+path);
+        // screenshot
+        filename = filenamePrefix+"screenshot.png";
+        Log.v("@saveLogInfo",filename);
+        path = writeToFile(lastScreenshot,filename);
+        Log.v("@saveLogInfo","save path: "+path);
 
+        Toast.makeText(context.getApplicationContext(),"End : saveLogInfo",Toast.LENGTH_LONG).show();
+
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+                Log.v(TAG,"Permission is revoked");
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
 }
