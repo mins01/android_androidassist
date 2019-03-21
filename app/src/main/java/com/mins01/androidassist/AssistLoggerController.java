@@ -251,6 +251,34 @@ public class AssistLoggerController {
         }
         return sb.toString();
     }
+    public String wisToHTML(String filename,ArrayList<WordInfo> wis,String imgUrl,String packagename,Date d){
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><head></head><body><div style='margin:0 auto; max-width:1000px'>");
+        sb.append("<h1> Assist test : "+packagename+"</h1>");
+        sb.append("<h2> datetime : "+d.toString()+"</h2>");
+        sb.append("<div style='display:inline-block; margin:5px;vertical-align: top;'><img src='"+imgUrl+"' style='max-width:400px'></div>");
+        sb.append("<div style='display:inline-block; margin:5px;vertical-align: top;' >\n\n<table border=\"1\" style='border-spacing: 0;border-collapse: collapse;'>\n");
+        sb.append("<tr>\n");
+        sb.append("<th>NO</th>\n");
+        sb.append("<th>word</th>\n");
+        sb.append("<th>count</th>\n");
+        sb.append("<th>score</th>\n");
+        sb.append("</tr>\n");
+        for(int i=0,m=Math.min(wis.size(),20);i<m;i++){
+            WordInfo wi = wis.get(i);
+            sb.append("<tr>\n");
+            sb.append("<td>"+(i+1)+"</td>\n");
+            sb.append("<td>"+wi.word+"</td>\n");
+            sb.append("<td>"+Long.toString(wi.count)+"</td>\n");
+            sb.append("<td>"+Double.toString(wi.score)+"</td>\n");
+            sb.append("</tr>\n");
+        }
+        sb.append("</table>\n\n</div>");
+        sb.append("</div></body></html>");
+        return sb.toString();
+    }
     public void saveLogInfo(){
 
 //        this.lastNis
@@ -263,31 +291,35 @@ public class AssistLoggerController {
         // nis
         filename = filenamePrefix+"nis.txt";
         Log.v("@saveLogInfo",filename);
-//        Log.v("@saveLogInfo",arraylistToString(lastNis));
         path = writeToFile(arraylistToString(lastNis),filename);
         Log.v("@saveLogInfo","save path: "+path);
         // tis
         filename = filenamePrefix+"tis.txt";
         Log.v("@saveLogInfo",filename);
-//        Log.v("@saveLogInfo",arraylistToString(lastTis));
         path = writeToFile(arraylistToString(lastTis),filename);
         Log.v("@saveLogInfo","save path: "+path);
         // wis
         filename = filenamePrefix+"wis.txt";
         Log.v("@saveLogInfo",filename);
-//        Log.v("@saveLogInfo",arraylistToString(lastWis));
         path = writeToFile(arraylistToString(lastWis),filename);
         Log.v("@saveLogInfo","save path: "+path);
         // screenshot
-        filename = filenamePrefix+"screenshot.png";
+        String imgUrl = filename = filenamePrefix+"screenshot.png";
         Log.v("@saveLogInfo",filename);
         path = writeToFile(lastScreenshot,filename);
+        Log.v("@saveLogInfo","save path: "+filename);
+        // html
+        filename = filenamePrefix+".html";
+        Log.v("@saveLogInfo",filename);
+        path = writeToFile(wisToHTML(filename,lastWis,imgUrl,packagename,d),filename);
         Log.v("@saveLogInfo","save path: "+path);
-
-        Toast.makeText(context.getApplicationContext(),"End : saveLogInfo",Toast.LENGTH_LONG).show();
-
+        Toast.makeText(context.getApplicationContext(),"Finish : saveLogInfo",Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * 외부 저장소 사용 가능 여부 체크
+     * @return
+     */
     public  boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)

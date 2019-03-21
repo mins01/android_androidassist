@@ -18,9 +18,9 @@ public class AssistPickupKeywords extends PickupKeywords {
         init();
     }
     private void init(){
-        conf_scores.addProperty("android.view.view",1);
-        conf_scores.addProperty("android.widget.edittext",200);
-        conf_scores.addProperty("android.widget.button",0);
+        conf_scores.addProperty("android.view.View",1);
+        conf_scores.addProperty("android.widget.Edittext",200);
+        conf_scores.addProperty("android.widget.Button",0);
 
         conf_scores.addProperty("node",0);
         conf_scores.addProperty("input",200);
