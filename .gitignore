@@ -1,6 +1,6 @@
-*/deployment_cert.der
-*/.jks
-*/.jks.txt
+*deployment_cert.der
+*.jks
+*.jks.txt
 # Created by https://www.gitignore.io/api/androidstudio
 # Edit at https://www.gitignore.io/?templates=androidstudio
 
