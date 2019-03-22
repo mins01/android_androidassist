@@ -150,6 +150,8 @@ public class AssistLoggerController {
 //            Log.v("@wi",wi.toString());
             tvTest.append((i+1)+":"+wi.toString()+"\n");
         }
+        tvTest.append("\nEND\n");
+        Toast.makeText(context, "Finish : Pickup", Toast.LENGTH_SHORT).show();
     }
 
     public String getAppName(String packagename) {
