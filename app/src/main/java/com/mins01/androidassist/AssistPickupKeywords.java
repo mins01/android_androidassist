@@ -27,7 +27,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         conf_scores.addProperty("input",200);
         Log.v("@AssistPickupKeywords",conf_scores.toString());
         numericWeight = 0.1; //숫자 가중치 줄임
-        wordToLowCase = true; //강제 소문자 처리
+        wordToLowerCase = true; //강제 소문자 처리
     }
     public ArrayList<NodeInfo> getNodeInfoByViewNode(AssistStructure.ViewNode viewNode) {
         ArrayList<NodeInfo> nis= new ArrayList<NodeInfo>();
