@@ -5,6 +5,7 @@
   "com.elevenst#title":1,
   "com.elevenst#text":1,     // decrease a category
 
+
   // # coupang #
   //item list on category of main page
   "com.coupang.mobile#tv_title" : 0,
@@ -53,7 +54,43 @@
   // product detail
   "com.jasonmg.market09#subject_tv" : 1000000,   // for removing App name and file extension
 //  "com.jasonmg.market09#subject_tv" : 1000000,   // for removing only file names
-  "com.jasonmg.market09#nickname_tv" :0
+  "com.jasonmg.market09#nickname_tv" :0,
+
+  // # Hidden Price #
+
+  // main page
+  "com.wemakeprice.hiddenprice#deal_list_title" : 2,
+  "com.wemakeprice.hiddenprice#hidden_price_string" : 0,
+  // category page (Top/low)
+  "com.wemakeprice.hiddenprice#tv_name" : 0,
+
+  // # 당근마켓(towneers)
+  // main page
+  "com.towneers.www#title_text" :5,
+  "com.towneers.www#spinner" :0,   // remove a location's info
+
+  // # GS SHOP #
+  // main page
+  "gsshop.mobile.v2#front_data_btn_pay":0,
+  "gsshop.mobile.v2#front_live_btn_pay":0,      // hide pay button records
+  "gsshop.mobile.v2#front_live_btn_schedule":0,
+  "gsshop.mobile.v2#front_data_btn_schedule":0, // hide live button records
+  "gsshop.mobile.v2#live_talk_text":0,
+  "gsshop.mobile.v2#txt_title":10,
+  // TV shopping page
+  "gsshop.mobile.v2#btn_pay":0,                // hide pay button records
+  "gsshop.mobile.v2#txt_remain_time":0,         // hide broadcast records
+  "gsshop.mobile.v2#psts_tab_title":0,         // hide navi info
+  "gsshop.mobile.v2#front_live_btn_live_talk":0,         // hide live talk
+  // Today's reccomend
+  "gsshop.mobile.v2#text_gs_x_brand_category_unselected":0,                // hide category info
+  "gsshop.mobile.v2#text_gs_x_brand_category_selected":0,                // hide category info
+  "gsshop.mobile.v2#program_text":0,                // hide notice info
+  "gsshop.mobile.v2#price_info":0,                // hide notice info
+  // new one in the spring
+  "gsshop.mobile.v2#txt_badge_per":0,
+  // now best products
+  "gsshop.mobile.v2#text_sales_quantity":0
 
 
 }
