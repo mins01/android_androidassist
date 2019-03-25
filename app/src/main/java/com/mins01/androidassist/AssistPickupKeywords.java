@@ -3,6 +3,7 @@ package com.mins01.androidassist;
 import android.app.assist.AssistStructure;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStructure;
 
 import com.google.gson.JsonObject;
 import com.mins01.java.PickupKeywords.PickupKeywords;
@@ -21,6 +22,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         super.init();
         conf_scores.addProperty("android.view.View",1);
         conf_scores.addProperty("android.widget.Edittext",200);
+        conf_scores.addProperty("android.webkit.WebView",100); //웹 뷰일 경우 타이틀값
         conf_scores.addProperty("android.widget.Button",0);
 
         conf_scores.addProperty("node",0);
@@ -36,6 +38,7 @@ public class AssistPickupKeywords extends PickupKeywords {
     }
 
     public void getNodeInfo(ArrayList<NodeInfo> nis, AssistStructure.ViewNode viewNode){
+//        Log.v("@ni_classname",viewNode.getClassName());
         if (viewNode.getVisibility() != View.VISIBLE) {
             return;
         }
@@ -71,6 +74,7 @@ public class AssistPickupKeywords extends PickupKeywords {
             score *= conf_scores_for_packagename.get(pkn_id).getAsLong();
             Log.v("@getScoreFromViewNode",pkn_id+"="+score);
         }
+
 
 
         return score;
