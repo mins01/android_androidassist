@@ -48,7 +48,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         int score = conf_scores.has(tag) ? conf_scores.get(tag).getAsInt():1;
         NodeInfo ni = null;
 
-        if(text != "" && text.length()>0 && viewNode.getTop() >= 0 && viewNode.getLeft() >= 0){
+        if(text.length()>0 && viewNode.getTop() >= 0 && viewNode.getLeft() >= 0){
             ni = new NodeInfo();
             ni.tag = tag;
             ni.text = text;
