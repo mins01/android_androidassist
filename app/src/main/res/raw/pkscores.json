@@ -1,10 +1,41 @@
 // packagename#idEntry:multipleScore
 {
+  // # 11st #
+  //item list on best page
+  "com.elevenst#title":1,
+  "com.elevenst#text":1,     // decrease a category
+
+  // # coupang #
+  //item list on category of main page
+  "com.coupang.mobile#tv_title" : 0,
+  "com.coupang.mobile#link_name" : 0,
+  "com.coupang.mobile#bottom_search_text" : 0,
+  //recent item which was looked on
+  "com.coupang.mobile#actionModePopupWindowStyle" : 10,
+  //category
+  "com.coupang.mobile#title" : 10,
+  // product detail
+  "com.coupang.mobile#name_text" : 1000,
+
+  // # Amazon #
+  // nothing to change
+
   // # ebay #
   // search result
   "com.ebay.mobile#title":100,
   "com.ebay.mobile#textview_item_title":10,
   // product detail
-  "com.ebay.mobile#textview_item_name":100
+  "com.ebay.mobile#textview_item_name":100,
+
+  // # Alibaba
+  // product detail on feed page
+  "com.alibaba.intl.android.apps.poseidon#title_tv_cell_title" : 30,
+  "com.alibaba.intl.android.apps.poseidon#id_name_item_product_info" : 20,
+  "com.alibaba.intl.android.apps.poseidon#id_text_product_similar_empty" : 0,
+
+  // search result
+  "com.alibaba.intl.android.apps.poseidon#title" : 30
+
+
 
 }
