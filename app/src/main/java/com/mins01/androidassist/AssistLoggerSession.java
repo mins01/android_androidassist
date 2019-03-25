@@ -15,12 +15,13 @@ import android.widget.Toast;
 
 public class AssistLoggerSession extends VoiceInteractionSession {
     public Context context=null;
-    private AssistLoggerController alc = new AssistLoggerController();
+    private AssistLoggerController alc;
     public View view_assist_main;
     public AssistLoggerSession(Context context) {
         super(context);
         this.context = context;
-        alc.context = context;
+//        alc.context = context;
+        alc = new AssistLoggerController(context);
         Log.v("@AssistLoggerSession","AssistLoggerSession");
     }
 

@@ -15,9 +15,10 @@ public class AssistPickupKeywords extends PickupKeywords {
     JsonObject conf_scores_for_packagename  = null;
 
     public AssistPickupKeywords(){
-        init();
+
     }
-    private void init(){
+    public void init(){
+        super.init();
         conf_scores.addProperty("android.view.View",1);
         conf_scores.addProperty("android.widget.Edittext",200);
         conf_scores.addProperty("android.widget.Button",0);
@@ -25,9 +26,10 @@ public class AssistPickupKeywords extends PickupKeywords {
         conf_scores.addProperty("node",0);
         conf_scores.addProperty("input",200);
         Log.v("@AssistPickupKeywords",conf_scores.toString());
-        numeric_multiple = 0.1;
+        numericWeight = 0.1; //숫자 가중치 줄임
+        wordToLowCase = true; //강제 소문자 처리
     }
-    public ArrayList<NodeInfo> getNodeInfoByViewNode(AssistStructure.ViewNode viewNode) throws Exception {
+    public ArrayList<NodeInfo> getNodeInfoByViewNode(AssistStructure.ViewNode viewNode) {
         ArrayList<NodeInfo> nis= new ArrayList<NodeInfo>();
         getNodeInfo(nis,viewNode);
         return nis;
@@ -41,7 +43,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         String idEntry = viewNode.getIdEntry()!=null?viewNode.getIdEntry():"";
         String text = viewNode.getText()!=null?viewNode.getText().toString().trim():"";
         String contentDescription = viewNode.getContentDescription()!=null?viewNode.getContentDescription().toString():"";
-        String tag = viewNode.getClassName()!=null?viewNode.getClassName().toString():"view";
+        String tag = viewNode.getClassName()!=null? viewNode.getClassName() :"view";
 
         int score = conf_scores.has(tag) ? conf_scores.get(tag).getAsInt():1;
         NodeInfo ni = null;
@@ -62,12 +64,12 @@ public class AssistPickupKeywords extends PickupKeywords {
     }
     private long getScoreFromViewNode( AssistStructure.ViewNode viewNode,long score){
         String pkn_id = packagename+"#"+viewNode.getIdEntry();
+        Log.v("@pkn_id",pkn_id);
+        score = Math.round(viewNode.getWidth()*viewNode.getHeight()/viewNode.getText().length())*score;
         if(conf_scores_for_packagename !=null && conf_scores_for_packagename.has(pkn_id)){
 
-            score = conf_scores_for_packagename.get(pkn_id).getAsLong();
+            score *= conf_scores_for_packagename.get(pkn_id).getAsLong();
             Log.v("@getScoreFromViewNode",pkn_id+"="+score);
-        }else{
-            score = Math.round(viewNode.getWidth()*viewNode.getHeight()/100)*score;
         }
 
 
@@ -78,7 +80,7 @@ public class AssistPickupKeywords extends PickupKeywords {
     public ArrayList<TextInfo> nodeInfoToTextInfo(ArrayList<NodeInfo> nis){
         ArrayList<TextInfo> tis = new ArrayList<TextInfo>();
         for (NodeInfo ni : nis){
-            tis.add((TextInfo) ni);
+            tis.add(ni);
         }
         return tis;
     }

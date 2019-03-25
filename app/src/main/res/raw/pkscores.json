@@ -1,0 +1,10 @@
+// packagename#idEntry:multipleScore
+{
+  // # ebay #
+  // search result
+  "com.ebay.mobile#title":100,
+  "com.ebay.mobile#textview_item_title":10,
+  // product detail
+  "com.ebay.mobile#textview_item_name":100
+
+}

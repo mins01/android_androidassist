@@ -22,12 +22,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mins01.java.PickupKeywords.TextInfo;
 import com.mins01.java.PickupKeywords.WordInfo;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
@@ -44,14 +49,19 @@ public class AssistLoggerController {
     public AssistContent content;
     public String packagename = "";
     public Context context;
-    public AssistPickupKeywords apk = new AssistPickupKeywords();
+    public AssistPickupKeywords apk;
     public View view_assist_main = null;
     public Bitmap lastScreenshot;
     public ArrayList<NodeInfo> lastNis = null;
     public ArrayList<TextInfo> lastTis = null;
     public ArrayList<WordInfo> lastWis = null;
-    public AssistLoggerController(){
+    public AssistLoggerController(Context context){
+        this.context = context;
+        apk = new AssistPickupKeywords();
+        apk.init();
 
+        apk.conf_scores_for_packagename = loadPkScoresJson();
+        Log.v("@tt",apk.conf_scores_for_packagename.toString());
     }
     public void onHandleScreenshot(Bitmap screenshot) {
         this.lastScreenshot = screenshot;
@@ -77,6 +87,7 @@ public class AssistLoggerController {
         this.content = content;
         if(structure != null){
             packagename = structure.getActivityComponent().getPackageName();
+            apk.packagename = packagename;
             ((TextView)view_assist_main.findViewById(R.id.tvPackagename)).setText(packagename);
             ((TextView)view_assist_main.findViewById(R.id.tvAppName)).setText(getAppName(packagename));
             Log.v("@setAssistData","packagename : "+packagename);
@@ -94,7 +105,7 @@ public class AssistLoggerController {
     }
     public void onCreateContentView(View view_assist_main){
         this.view_assist_main = view_assist_main;
-        ((Button)view_assist_main.findViewById(R.id.btnPickup)).setOnClickListener(
+        view_assist_main.findViewById(R.id.btnPickup).setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
@@ -110,7 +121,7 @@ public class AssistLoggerController {
                     }
                 }
         );
-        ((Button)view_assist_main.findViewById(R.id.btnSaveLog)).setOnClickListener(
+        view_assist_main.findViewById(R.id.btnSaveLog).setOnClickListener(
                 new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
@@ -337,5 +348,15 @@ public class AssistLoggerController {
             Log.v(TAG,"Permission is granted");
             return true;
         }
+    }
+
+    /**
+     * 패키지용 점수 파일 읽어오기
+     * @return
+     */
+    public JsonObject loadPkScoresJson(){
+        InputStream in = context.getResources().openRawResource(R.raw.pkscores);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        return (JsonObject)(new JsonParser()).parse(reader);
     }
 }
