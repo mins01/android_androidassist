@@ -27,15 +27,33 @@
   // product detail
   "com.ebay.mobile#textview_item_name":100,
 
-  // # Alibaba
+  // # Alibaba #
   // product detail on feed page
   "com.alibaba.intl.android.apps.poseidon#title_tv_cell_title" : 30,
   "com.alibaba.intl.android.apps.poseidon#id_name_item_product_info" : 20,
   "com.alibaba.intl.android.apps.poseidon#id_text_product_similar_empty" : 0,
-
   // search result
-  "com.alibaba.intl.android.apps.poseidon#title" : 30
+  "com.alibaba.intl.android.apps.poseidon#title" : 30,
 
+  // # Tmall #
+  // product list on search result
+  "com.tmall.wireless#tm_search_result_item_title" : 30,
+  // product list on category low depth
+  "com.tmall.wireless#pic_mode_title_waterfall" : 30,
+
+  // # Lazada #
+  // search result
+  "com.lazada.android#product_name_text_view" : 10,
+  // Feed page
+  "com.lazada.android#shop_name" : 10,
+  // product detail
+  "com.lazada.android#title" : 10,
+
+  // # 공구마켓(Market09) #
+  // product detail
+  "com.jasonmg.market09#subject_tv" : 1000000,   // for removing App name and file extension
+//  "com.jasonmg.market09#subject_tv" : 1000000,   // for removing only file names
+  "com.jasonmg.market09#nickname_tv" :0
 
 
 }
