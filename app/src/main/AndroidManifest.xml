@@ -17,6 +17,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- for test. 액티비티 기준으로 어시스턴트 앱으로 등록 -->
+            <!--<intent-filter android:label="XXX">-->
+                <!--<action android:name="android.intent.action.ASSIST"/>-->
+                <!--<category android:name="android.intent.category.DEFAULT"/>-->
+            <!--</intent-filter>-->
         </activity>
 
         <!-- 어시스트 서비스 등록 -->
