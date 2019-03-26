@@ -1,10 +1,38 @@
 // packagename#idEntry:multipleScore
 {
   // # 11st #
-  //item list on best page
+  //item list on main page
   "com.elevenst#title":1,
-  "com.elevenst#text":1,     // decrease a category
+  "com.elevenst#text":0.5,     // decrease a category
+  "com.elevenst#main_tab_textview":0.5,
+  "com.elevenst#gnb_new_bottom_searchinput_text" :0.5,
+  // remove a junk value
+  "com.elevenst#sold_out_img_text":0,     // prevent to show a sold out text
+  "com.elevenst#title2":0,
+  "com.elevenst#sold_out_text":0,
+  "com.elevenst#sel_text":0,
+  "com.elevenst#pui_relates_a_01_text1" :0, //free ship
+  "com.elevenst#pui_relates_a_01_text2" :0,
+  "com.elevenst#prdNm" :0,        // prevent gender
+  "com.elevenst#gnb_new_bottom_search_all" :0,
+  "com.elevenst#special_text" :0,
+  "com.elevenst#btn_custom_footer" :0,
+  "com.elevenst#imgTextTitleArrowRight" :0,
+  "com.elevenst#cell_footer_notice" :0,
+  "com.elevenst#footer_text2" :0,
+  "com.elevenst#review_text" :0,
+  "com.elevenst#price" :0,
+  "com.elevenst#oprice" :0,
 
+  // serached list page
+  // remove junk values
+  "com.elevenst#catalogTitle" :0,
+  "com.elevenst#catalogMinPrice" :0,
+  "com.elevenst#catalogUnitText" :0,
+  "com.elevenst#text1" :0,
+  "com.elevenst#review_text" :0,
+  "com.elevenst#review_title" :0,
+  "com.elevenst#reviewTitle" :0,
 
   // # coupang #
   //item list on category of main page
@@ -57,17 +85,18 @@
   "com.jasonmg.market09#nickname_tv" :0,
 
   // # Hidden Price #
-
   // main page
   "com.wemakeprice.hiddenprice#deal_list_title" : 2,
   "com.wemakeprice.hiddenprice#hidden_price_string" : 0,
   // category page (Top/low)
   "com.wemakeprice.hiddenprice#tv_name" : 0,
 
+
   // # 당근마켓(towneers)
   // main page
   "com.towneers.www#title_text" :5,
   "com.towneers.www#spinner" :0,   // remove a location's info
+
 
   // # GS SHOP #
   // main page
@@ -90,7 +119,357 @@
   // new one in the spring
   "gsshop.mobile.v2#txt_badge_per":0,
   // now best products
-  "gsshop.mobile.v2#text_sales_quantity":0
+  "gsshop.mobile.v2#text_sales_quantity":0,
 
+
+  //G Market
+  //main page
+  "com.ebay.kr.gmarket#tv_item_main_title" : 3,
+  "com.ebay.kr.gmarket#vp_indicator_title" : 0.5,
+  "com.ebay.kr.gmarket#tv_title" : 1.5,
+  // remove junk values
+  "com.ebay.kr.gmarket#tv_highlight_text" : 0,
+  "com.ebay.kr.gmarket#discount_rate_tv" : 0,
+  "com.ebay.kr.gmarket#tv_discount_price" : 0,
+  "com.ebay.kr.gmarket#tv_original_price" : 0,
+  "com.ebay.kr.gmarket#tv_buy_count_text" : 0,
+  "com.ebay.kr.gmarket#original_price_tv" : 0,
+  "com.ebay.kr.gmarket#discount_price_tv" : 0,
+  "com.ebay.kr.gmarket#tv_bottom_text" : 0,
+  "com.ebay.kr.gmarket#tv_bottom_bold_text" : 0,
+  "com.ebay.kr.gmarket#item_name_tv" : 0,
+  "com.ebay.kr.gmarket#tv_product_view_count" : 0,
+  "com.ebay.kr.gmarket#tv_description" : 0,
+  "com.ebay.kr.gmarket#iv_special_tag" : 0,
+  "com.ebay.kr.gmarket#right_item_tv" : 0,
+  "com.ebay.kr.gmarket#left_item_tv" : 0,
+  "com.ebay.kr.gmarket#tv_info_text" : 0,
+  "com.ebay.kr.gmarket#tv_remain_time" : 0,
+  //law depth category page
+  "com.ebay.kr.gmarket#item_shipping" : 0,
+  "com.ebay.kr.gmarket#item_name" : 2,
+  //Smile ship page
+  "com.ebay.kr.gmarket#best_item_no_1" : 0,
+  "com.ebay.kr.gmarket#best_item_title_1" : 2.5,
+  "com.ebay.kr.gmarket#best_item_price_1" :0,
+  "com.ebay.kr.gmarket#best_item_no_2" : 0,
+  "com.ebay.kr.gmarket#best_item_title_2" : 2.5,
+  "com.ebay.kr.gmarket#best_item_price_2" :0,
+  "com.ebay.kr.gmarket#best_item_delivery_1" :0,
+  "com.ebay.kr.gmarket#best_item_delivery_2" :0,
+  "com.ebay.kr.gmarket#category_bt" :0,
+  "com.ebay.kr.gmarket#tv_header_name" :0,
+  "com.ebay.kr.gmarket#tv_item_name" :3,
+  //Best page
+  "com.ebay.kr.gmarket#express_shop_top_banner_text" :0,
+  "com.ebay.kr.gmarket#express_shop_info_name" :0,
+  "com.ebay.kr.gmarket#express_shop_info_address" :0,
+  "com.ebay.kr.gmarket#express_shop_branch_name" :0,
+  "com.ebay.kr.gmarket#" :0,
+  "com.ebay.kr.gmarket#" :0,
+  "com.ebay.kr.gmarket#category_name" :0,
+  "com.ebay.kr.gmarket#corner_search_title" :0,
+
+  //Ship on today
+  "com.ebay.kr.gmarket#express_shop_event_menu_name" :0,
+  "com.ebay.kr.gmarket#express_shop_shop_name" :0,
+  "com.ebay.kr.gmarket#express_shop_event_item_price" :0,
+  "com.ebay.kr.gmarket#express_shop_item_title" :0,
+  "com.ebay.kr.gmarket#iv_homeshopping_special_price" :0,
+  "com.ebay.kr.gmarket#tv_product_price" :0,
+  "com.ebay.kr.gmarket#tv_discount_price_won" :0,
+  "com.ebay.kr.gmarket#tv_company_name" :0,
+  "com.ebay.kr.gmarket#iv_live_icon" :0,
+  //HomeShopping page
+  "com.ebay.kr.gmarket#tv_product_title" :5,
+  "com.ebay.kr.gmarket#tv_no_broadcast_desc" :0,
+  "com.ebay.kr.gmarket#tv_no_broadcast_time_info" :0,
+  //Department page
+  "com.ebay.kr.gmarket#item_title" :0,
+  "com.ebay.kr.gmarket#" :0,
+
+
+
+  // # E-Mart Mall #
+  // main page
+  "kr.co.emart.emartmall#main_recipe_tab_name" :0,
+  "kr.co.emart.emartmall#text_title" :0,
+  "kr.co.emart.emartmall#textView_product_name" :2.5,
+  //remove junk values
+  "kr.co.emart.emartmall#title" :0,
+  "kr.co.emart.emartmall#textView_mall" :0,
+  "kr.co.emart.emartmall#textView_product_purchase_price" :0,
+  "kr.co.emart.emartmall#textView_product_price_unit" :0,
+  "kr.co.emart.emartmall#product_option_detail" :0,
+  "kr.co.emart.emartmall#textview_delivery_option1" :0,
+  "kr.co.emart.emartmall#textView_selling_point_name" :0,
+  "kr.co.emart.emartmall#tabTitle" :0,
+//  "kr.co.emart.emartmall#" :0,
+
+  // # CJ Mall #
+  // main page
+  "com.cjoshppingphone#product_title" : 2,
+  //remove junk values
+  "com.cjoshppingphone#benefit" : 0,
+  "com.cjoshppingphone#title" : 0,
+  "com.cjoshppingphone#title_view" : 0,
+  "com.cjoshppingphone#menu" : 0,
+  "com.cjoshppingphone#live_product_price" : 0,
+  "com.cjoshppingphone#live_talk_pv" : 0,
+  "com.cjoshppingphone#live_remain_time" : 0,
+  "com.cjoshppingphone#live_right_btn_num" : 0,
+  "com.cjoshppingphone#product_price" : 0,
+  "com.cjoshppingphone#market_price" : 0,
+  "com.cjoshppingphone#customer_price" : 0,
+  "com.cjoshppingphone#customer_price_unit" : 0,
+  "com.cjoshppingphone#broadcasting_time" : 0,
+  "com.cjoshppingphone#main_search_copy" : 0,
+  "com.cjoshppingphone#first_flag_title" : 0,
+  "com.cjoshppingphone#rate" : 0,
+  "com.cjoshppingphone#order_count" : 0,
+  "com.cjoshppingphone#broadcasting_time_label" : 0,
+  // O'Clock deal page
+  "com.cjoshppingphone#order_count_unit" : 0,
+
+  //Mart page
+  "com.cjoshppingphone#first_product_title" : 1.5,
+  "com.cjoshppingphone#second_product_title" : 1.5,
+  "com.cjoshppingphone#third_product_title" : 1.5,
+  "com.cjoshppingphone#first_contents_keyword" : 0,
+  "com.cjoshppingphone#second_contents_keyword" : 0,
+  "com.cjoshppingphone#third_contents_keyword" : 0,
+  "com.cjoshppingphone#copy" : 0,
+  "com.cjoshppingphone#sub_copy" : 0,
+  // best page
+  "com.cjoshppingphone#brand_store_text" : 0,
+  "com.cjoshppingphone#category_nm" : 0,
+  "com.cjoshppingphone#ranking" : 0,
+  "com.cjoshppingphone#first_flag" : 0,
+  "com.cjoshppingphone#second_flag" : 0,
+
+
+  // # SSG #
+  //main(SSG), obanjang page
+  "kr.co.ssg#tv_item_name" : 2,
+  "kr.co.ssg#textView_product_name" : 1,
+  "kr.co.ssg#text_product_name" : 2,
+  "kr.co.ssg#title" : 0,
+  "kr.co.ssg#text_title" : 0,
+  "kr.co.ssg#tabTitle" : 0,    // category
+  "kr.co.ssg#textSellerName" : 0,
+  "kr.co.ssg#seller_tab_store_display_price" : 0,
+  "kr.co.ssg#tv_title" : 0,
+  "kr.co.ssg#tv_sticker1" : 0,
+  "kr.co.ssg#barDayText" : 0,
+  "kr.co.ssg#barDayInfoText" : 0,
+  "kr.co.ssg#barRateText" : 0,
+  "kr.co.ssg#tv_allbtn" : 0,
+  "kr.co.ssg#tv_index" : 0,
+  "kr.co.ssg#text_name" : 0,
+  "kr.co.ssg#textView_mall" : 0,
+  "kr.co.ssg#textView_selling_point_name" : 0,
+  "kr.co.ssg#textView_product_purchase_price" : 0,
+  "kr.co.ssg#textView_product_price_unit" : 0,
+  "kr.co.ssg#tildeDisplay" : 0,
+  "kr.co.ssg#textview_mdtalk_title" : 0,
+  "kr.co.ssg#text_item_ord_qty" : 0,
+  "kr.co.ssg#seller_tab_store_message" : 0,
+  "kr.co.ssg#seller_clip_count" : 0,
+  "kr.co.ssg#seller__comment_count" : 0,
+  "kr.co.ssg#banner_main" : 0,
+  "kr.co.ssg#seller_name" : 0,
+  "kr.co.ssg#happyBuyrusUnit" : 0,
+  "kr.co.ssg#txt_refresh" : 0,
+  // recent see
+  "kr.co.ssg#img_delete_all" : 0,
+  "kr.co.ssg#text_history_type" : 0,
+  "kr.co.ssg#text_real_price" : 0,
+  "kr.co.ssg#tv_won" : 0,
+  "kr.co.ssg#text_item" : 3,
+  "kr.co.ssg#text_title1" : 0,
+  "kr.co.ssg#text_title2" : 0,
+  "kr.co.ssg#tvTab" : 0,
+  "kr.co.ssg#textView_benefit1_bottom" : 0,
+  // searched list page
+  "kr.co.ssg#textview_delivery_option1" : 0,
+  "kr.co.ssg#textView_product_original_price" : 0,
+  "kr.co.ssg#textView_product_original_price_unit" : 0,
+  "kr.co.ssg#view_detail_option" : 0,
+  "kr.co.ssg#card_banner_subtitle" : 0,
+  "kr.co.ssg#card_banner_main1" : 0,
+  "kr.co.ssg#card_banner_main2" : 0,
+  "kr.co.ssg#text_emart" : 0,
+  "kr.co.ssg#product_option_detail" : 0,
+  "kr.co.ssg#text_f02_brand" : 0,
+  "kr.co.ssg#text_f02_category" : 0,
+  // product detail
+  "kr.co.ssg#ty_title" : 0,
+  "kr.co.ssg#tv_cur_page" : 0,
+  "kr.co.ssg#tv_total_page" : 0,
+  "kr.co.ssg#tv_banner_type" : 0,
+  "kr.co.ssg#tv_detail_brand_name" : 0,
+  "kr.co.ssg#tv_sell_price" : 0,
+  "kr.co.ssg#tv_sell_price_sub" : 0,
+  "kr.co.ssg#tv_price_info" : 0,
+  "kr.co.ssg#tv_share" : 0,
+  "kr.co.ssg#tv_clip" : 0,
+  "kr.co.ssg#tv_avg_point" : 0,
+  "kr.co.ssg#tv_recom_count" : 0,
+  "kr.co.ssg#pd_sum" : 0,
+  "kr.co.ssg#pd_sum_sub" : 0,
+  "kr.co.ssg#additional_layout_info_msg" : 0,
+  "kr.co.ssg#btn_cart" : 0,
+  "kr.co.ssg#btn_buy" : 0,
+  "kr.co.ssg#tv_place_origin_info" : 0,
+
+  // # We Make Price
+  // main page
+  "com.wemakeprice#tv_name" : 0,
+  "com.wemakeprice#tvDealTag" : 0,
+  "com.wemakeprice#deal_list_price" : 0,
+  "com.wemakeprice#deal_list_price_won" : 0,
+  "com.wemakeprice#auto_label" : 0,
+  "com.wemakeprice#deal_list_count" : 0,
+  "com.wemakeprice#tvDealPercent" : 0,
+  // category page
+  "com.wemakeprice#deal_list_tv_sticker_delivery" : 0,
+  "com.wemakeprice#deal_list_line_summary" : 0,
+  "com.wemakeprice#deallist_review_count" : 0,
+  "com.wemakeprice#tv_topTitle" : 0,
+  "com.wemakeprice#tv_ad_icon" : 0,
+
+  // # Hi Mart #
+  // main page
+  "com.himart.main#title" :0,
+  "com.himart.main#tv_title1" :0,
+  "com.himart.main#tv_title2" :0,
+  "com.himart.main#tv_title3" :0,
+  "com.himart.main#gnb_title" :0,
+  "com.himart.main#tv_price" :0,
+  "com.himart.main#tv_benefit_price" :0,
+  "com.himart.main#tv_comment" :0,
+  "com.himart.main#tv_date" :0,
+  "com.himart.main#tv_mts" :0,
+  // category items
+  "com.himart.main#tv_dsnt" :0,
+  // recent product
+  "com.himart.main#search_bottom_popular" :0,
+  "com.himart.main#search_remove_all" :0,
+  "com.himart.main#lately_date" :0,
+
+
+  // # InterPark #
+  // main page
+  "com.interpark.shop#tv_product_title" : 4,
+  "com.interpark.shop#tv_title" : 0,
+  "com.interpark.shop#tv_ssendeal_link" : 0,
+  "com.interpark.shop#tv_product_sale_price" : 0,
+  "com.interpark.shop#tv_product_price" : 0,
+  "com.interpark.shop#tv_product_rate" : 0,
+  "com.interpark.shop#txt_category" : 0,
+  "com.interpark.shop#txt_prd_price" : 0,
+  "com.interpark.shop#txt_prd_delivery" : 0,
+  "com.interpark.shop#tv_more_title" : 0,
+  "com.interpark.shop#tv_ceo" : 0,
+  "com.interpark.shop#tv_address" : 0,
+  "com.interpark.shop#tv_user_guide1" : 0,
+  "com.interpark.shop#tv_user_guide2" : 0,
+  "com.interpark.shop#tv_user_guide3" : 0,
+  "com.interpark.shop#tv_explanation" : 0,
+  "com.interpark.shop#tv_copyright" : 0,
+  "com.interpark.shop#tv_page_cnt" : 0,
+  "com.interpark.shop#tv_theme" : 0,
+  "com.interpark.shop#tv_price" : 0,
+  "com.interpark.shop#tv_percent" : 0,
+  "com.interpark.shop#tv_ing" : 0,
+  "com.interpark.shop#tv_cate_title" : 0,
+  "com.interpark.shop#tv_minishop_section" : 0,
+  "com.interpark.shop#tv_helpDesk" : 0,
+
+  // # Ali Express #
+  // main page
+  "com.alibaba.aliexpresshd#price" :0,
+  "com.alibaba.aliexpresshd#origin_price" :0,
+  "com.alibaba.aliexpresshd#sales" :0,
+  "com.alibaba.aliexpresshd#search_hint" :0,
+  "com.alibaba.aliexpresshd#largeLabel" :0,
+  "com.alibaba.aliexpresshd#smallLabel" :0,
+  "com.alibaba.aliexpresshd#description" :20,
+
+  // # Lotte Home shopping #
+  // main page
+  "com.omnitel.android.lottewebview#dual_liveTv_time":0,
+  "com.omnitel.android.lottewebview#dual_liveTv_price":0,
+  "com.omnitel.android.lottewebview#dual_liveTv_priceUnit":0,
+  "com.omnitel.android.lottewebview#btn_dual_liveTv_buy":0,
+  "com.omnitel.android.lottewebview#btn_dual_liveTv_voice":0,
+  "com.omnitel.android.lottewebview#btn_dual_liveTv_schedule":0,
+  "com.omnitel.android.lottewebview#dual_oneTv_time":0,
+  "com.omnitel.android.lottewebview#dual_oneTv_price":0,
+  "com.omnitel.android.lottewebview#dual_oneTv_priceUnit":0,
+  "com.omnitel.android.lottewebview#btn_dual_oneTv_buy":0,
+  "com.omnitel.android.lottewebview#btn_dual_oneTv_schedule":0,
+  "com.omnitel.android.lottewebview#banner_index":0,
+  "com.omnitel.android.lottewebview#gnb_title":0,
+  "com.omnitel.android.lottewebview#gnb_new_title":0,
+  "com.omnitel.android.lottewebview#btn_liveTv_buy":0,
+  "com.omnitel.android.lottewebview#txt_voice":0,
+  "com.omnitel.android.lottewebview#btn_liveTv_talk":0,
+  "com.omnitel.android.lottewebview#liveTv_benefit_unit":0,
+  "com.omnitel.android.lottewebview#liveTv_benefit_prc":0,
+  "com.omnitel.android.lottewebview#today_tab_txt":0,
+  "com.omnitel.android.lottewebview#today_liveTv_time":0,
+  "com.omnitel.android.lottewebview#search_hint":0,
+  "com.omnitel.android.lottewebview#btn_liveTv_timetable":0,
+  "com.omnitel.android.lottewebview#evt_txt":0,
+  "com.omnitel.android.lottewebview#benefit_txt":0,
+  "com.omnitel.android.lottewebview#benefit_prc":0,
+  "com.omnitel.android.lottewebview#normal_prc":0,
+  "com.omnitel.android.lottewebview#prcUnit2":0,
+  "com.omnitel.android.lottewebview#prcUnit":0,
+  "com.omnitel.android.lottewebview#ord_cnt":0,
+  "com.omnitel.android.lottewebview#ord_cnt_txt":0,
+  // product detail
+  "com.omnitel.android.lottewebview#sub_title_normal":0,
+  // recent product
+  "com.omnitel.android.lottewebview#tv_home":0,
+  "com.omnitel.android.lottewebview#tv_category":0,
+  "com.omnitel.android.lottewebview#tv_mypage":0,
+  "com.omnitel.android.lottewebview#tv_cart":0,
+  //Department page
+  "com.omnitel.android.lottewebview#menuNm":0,
+  "com.omnitel.android.lottewebview#tv_review_buy_cnt":0,
+  "com.omnitel.android.lottewebview#mainText":0,
+  "com.omnitel.android.lottewebview#subText1":0,
+  "com.omnitel.android.lottewebview#subText2":0,
+  "com.omnitel.android.lottewebview#subText3":0,
+  "com.omnitel.android.lottewebview#searchTasteTv":0,
+  "com.omnitel.android.lottewebview#testTasteTv":0,
+  "com.omnitel.android.lottewebview#tv_rest":0,
+  "com.omnitel.android.lottewebview#tv_eat":0,
+  "com.omnitel.android.lottewebview#tv_play":0,
+  "com.omnitel.android.lottewebview#tv_arrange":0,
+
+  // # 현대 Mall #
+  // main page
+  "com.hmallapp#strip_title":0,
+
+  // # 지그재그 #
+  // main page
+  "com.croquis.zigzag#name_text" :6,
+  "com.croquis.zigzag#price_text" :0,
+  "com.croquis.zigzag#age" :0,
+  "com.croquis.zigzag#double_style1" :0,
+  "com.croquis.zigzag#double_style2" :0,
+  "com.croquis.zigzag#bookmark_label" :0,
+
+
+  // # 할인 중독 #
+  // main page
+  "com.jasonmg.salepoison#subject_tv" : 50,
+  "com.jasonmg.salepoison#nickname_tv" : 0,
+  "com.jasonmg.salepoison#target_name_tv" : 0,
+  "com.jasonmg.salepoison#comment_tv" : 0,
+  "com.jasonmg.salepoison#date_tv" : 0
 
 }
