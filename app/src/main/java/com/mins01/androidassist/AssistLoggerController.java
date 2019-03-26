@@ -27,6 +27,8 @@ import com.google.gson.JsonParser;
 import com.mins01.java.PickupKeywords.TextInfo;
 import com.mins01.java.PickupKeywords.WordInfo;
 
+import org.jsoup.nodes.Document;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,6 +63,7 @@ public class AssistLoggerController {
         apk.init();
 
         apk.conf_scores_for_packagename = loadPkScoresJson();
+        apk.conf_scores_for_custom_selector = loadCustomSelectorJson();
         Log.v("@tt",apk.conf_scores_for_packagename.toString());
     }
     public void onHandleScreenshot(Bitmap screenshot) {
@@ -94,11 +97,32 @@ public class AssistLoggerController {
         }
 
     }
-    public ArrayList<NodeInfo> getTextsFromStructure(AssistStructure structure) throws Exception {
+    @Deprecated
+    public ArrayList<NodeInfo> getNisFromStructure(AssistStructure structure) throws Exception {
         if(structure == null){
             throw new Exception("structure is null");
         }
+//        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+//        Log.v("@doc",doc.html());
+//        apk.setHTML(doc.html());
+//        System.out.println("=======");
+//        System.out.println(doc.html());
+//        System.out.println("=======");
         return apk.getNodeInfoByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+    }
+    public ArrayList<TextInfo> getTisFromStructure(AssistStructure structure) throws Exception {
+        if(structure == null){
+            throw new Exception("structure is null");
+        }
+        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+        Log.v("@doc",doc.html());
+        apk.setHTML(doc.html());
+//        System.out.println("=======");
+//        System.out.println(doc.html());
+//        System.out.println("=======");
+        ArrayList<TextInfo> tis = apk.getTexts();
+        tis.addAll(apk.getCustomTexts());
+        return tis;
     }
     public void onHandleAssist() throws Exception {
         actPickupKeyWords();
@@ -132,25 +156,27 @@ public class AssistLoggerController {
         );
     }
     public void actPickupKeyWords() throws Exception {
-        ArrayList<NodeInfo> nis = getTextsFromStructure(structure);
-        ArrayList<TextInfo> tis = apk.nodeInfoToTextInfo(nis);
+//        ArrayList<NodeInfo> nis = getNisFromStructure(structure);
+//        ArrayList<TextInfo> tis = apk.nodeInfoToTextInfo(nis);
+        ArrayList<TextInfo> tis = getTisFromStructure(structure);
+
         ArrayList<WordInfo> wis = apk.getWords(tis);
-        this.lastNis = nis;
+//        this.lastNis = nis;
         this.lastTis = tis;
         this.lastWis = wis;
         TextView tvTest = view_assist_main.findViewById(R.id.tvTest);
         tvTest.setText("");
-        for(int i=0,m=nis.size();i<m;i++){
-            NodeInfo ni = nis.get(i);
-            Log.v("@ni",ni.toString());
-//            tvTest.append(ni.toString()+"\n");
-        }
-//
-//        for(int i=0,m=tis.size();i<m;i++){
-//            TextInfo ti = tis.get(i);
-//            Log.v("@ti",ti.toString());
-//            tvTest.append(ti.toString()+"\n");
+//        for(int i=0,m=nis.size();i<m;i++){
+//            NodeInfo ni = nis.get(i);
+//            Log.v("@ni",ni.toString());
+////            tvTest.append(ni.toString()+"\n");
 //        }
+//
+        for(int i=0,m=tis.size();i<m;i++){
+            TextInfo ti = tis.get(i);
+            Log.v("@ti",ti.toString());
+//            tvTest.append(ti.toString()+"\n");
+        }
         for(int i=0,m=wis.size();i<m;i++){
             WordInfo wi = wis.get(i);
             Log.v("@wi",wi.toString());
@@ -301,11 +327,11 @@ public class AssistLoggerController {
         Date d = new Date();
         String filenamePrefix = "["+sdf.format(d)+"]["+packagename+"]";
         String filename = "",path = "";
-        // nis
-        filename = filenamePrefix+"nis.txt";
-        Log.v("@saveLogInfo",filename);
-        path = writeToFile(arraylistToString(lastNis),filename);
-        Log.v("@saveLogInfo","save path: "+path);
+//        // nis
+//        filename = filenamePrefix+"nis.txt";
+//        Log.v("@saveLogInfo",filename);
+//        path = writeToFile(arraylistToString(lastNis),filename);
+//        Log.v("@saveLogInfo","save path: "+path);
         // tis
         filename = filenamePrefix+"tis.txt";
         Log.v("@saveLogInfo",filename);
@@ -321,8 +347,13 @@ public class AssistLoggerController {
         Log.v("@saveLogInfo",filename);
         path = writeToFile(lastScreenshot,filename);
         Log.v("@saveLogInfo","save path: "+filename);
-        // html
-        filename = filenamePrefix+".html";
+        // raw.html
+        filename = filenamePrefix+"raw.html";
+        Log.v("@saveLogInfo",filename);
+        path = writeToFile(apk.doc.html(),filename);
+        Log.v("@saveLogInfo","save path: "+path);
+        // report.html
+        filename = filenamePrefix+"report.html";
         Log.v("@saveLogInfo",filename);
         path = writeToFile(wisToHTML(filename,lastWis,imgUrl,packagename,d),filename);
         Log.v("@saveLogInfo","save path: "+path);
@@ -356,6 +387,16 @@ public class AssistLoggerController {
      */
     public JsonObject loadPkScoresJson(){
         InputStream in = context.getResources().openRawResource(R.raw.pkscores);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        return (JsonObject)(new JsonParser()).parse(reader);
+    }
+
+    /**
+     * 패키지용 점수 파일 읽어오기
+     * @return
+     */
+    public JsonObject loadCustomSelectorJson(){
+        InputStream in = context.getResources().openRawResource(R.raw.custom_selector);
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         return (JsonObject)(new JsonParser()).parse(reader);
     }

@@ -5,38 +5,88 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewStructure;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mins01.java.PickupKeywords.PickupKeywords;
 import com.mins01.java.PickupKeywords.TextInfo;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 public class AssistPickupKeywords extends PickupKeywords {
     String packagename = "";
     JsonObject conf_scores_for_packagename  = null;
+    JsonObject conf_scores_for_custom_selector  = null;
 
     public AssistPickupKeywords(){
 
     }
     public void init(){
         super.init();
-        conf_scores.addProperty("android.view.View",1);
-        conf_scores.addProperty("android.widget.Edittext",200);
-        conf_scores.addProperty("android.webkit.WebView",100); //웹 뷰일 경우 타이틀값
-        conf_scores.addProperty("android.widget.Button",0);
+        search_tags = "h1,h2,h3,h4,h5,title,span,div,li,a,input[type=text][value],android_view_view,android_widget_textview,android_widget_edittext,android_webkit_webview";
+
+//        conf_scores.addProperty("android.view.View",1);
+//        conf_scores.addProperty("android.widget.EditText",200);
+//        conf_scores.addProperty("android.webkit.WebView",100); //웹 뷰일 경우 타이틀값
+//        conf_scores.addProperty("android.widget.Button",0);
+
+        conf_scores.addProperty("android_view_view",1);
+        conf_scores.addProperty("android_widget_textview",1);
+        conf_scores.addProperty("android_widget_edittext",200);
+        conf_scores.addProperty("android_webkit_webview",100); //웹 뷰일 경우 타이틀값
+        conf_scores.addProperty("android_widget_button",0);
 
         conf_scores.addProperty("node",0);
         conf_scores.addProperty("input",200);
         Log.v("@AssistPickupKeywords",conf_scores.toString());
-        numericWeight = 0.1; //숫자 가중치 줄임
+        numericWeight = 0; //숫자 가중치 줄임
         wordToLowerCase = true; //강제 소문자 처리
     }
+    public Document getDomByViewNode(AssistStructure.ViewNode viewNode){
+        Document doc = Jsoup.parse("<!doctype html><html><head><meta charset=\"utf-8\"></head><body></body></html>", "file://temp/local");
+        Element p = doc.body();
+        appendDom(doc,p,viewNode);
+        return doc;
+    }
+    public void appendDom(Document doc,Element p,AssistStructure.ViewNode viewNode){
+        String idEntry = viewNode.getIdEntry()!=null?viewNode.getIdEntry():"";
+        String text = viewNode.getText()!=null?viewNode.getText().toString().trim():"";
+        String contentDescription = viewNode.getContentDescription()!=null?viewNode.getContentDescription().toString():"";
+        String tag = (viewNode.getClassName()!=null? viewNode.getClassName() :"view").replace(".","_").toLowerCase();
+
+        Element el = p.appendElement(tag);
+        el.attr("data-top", String.valueOf(viewNode.getTop()));
+        el.attr("data-left", String.valueOf(viewNode.getLeft()));
+        el.attr("data-width", String.valueOf(viewNode.getWidth()));
+        el.attr("data-height", String.valueOf(viewNode.getHeight()));
+        if(text.length()>0){
+            if(tag.equals("android_webkit_webview")){
+                doc.title(text);
+            }
+            el.text(text);
+        }
+        if(idEntry.length()>0){ el.addClass(idEntry); }
+        if(contentDescription.length()>0){ el.attr("title",contentDescription); }
+
+//        p.appendChild(el);
+        for(int i2 =0,m2=viewNode.getChildCount();i2<m2;i2++) {
+            appendDom(doc,el,viewNode.getChildAt(i2));
+        }
+//        return ;
+    }
+    @Deprecated
     public ArrayList<NodeInfo> getNodeInfoByViewNode(AssistStructure.ViewNode viewNode) {
         ArrayList<NodeInfo> nis= new ArrayList<NodeInfo>();
         getNodeInfo(nis,viewNode);
         return nis;
     }
-
+    @Deprecated
     public void getNodeInfo(ArrayList<NodeInfo> nis, AssistStructure.ViewNode viewNode){
 //        Log.v("@ni_classname",viewNode.getClassName());
         if (viewNode.getVisibility() != View.VISIBLE) {
@@ -65,6 +115,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         }
 //        return ti;
     }
+    @Deprecated
     private long getScoreFromViewNode( AssistStructure.ViewNode viewNode,long score){
         String pkn_id = packagename+"#"+viewNode.getIdEntry();
         Log.v("@pkn_id",pkn_id);
@@ -80,11 +131,42 @@ public class AssistPickupKeywords extends PickupKeywords {
         return score;
     }
 
-
+    @Deprecated
     public ArrayList<TextInfo> nodeInfoToTextInfo(ArrayList<NodeInfo> nis){
         ArrayList<TextInfo> tis = new ArrayList<TextInfo>();
         for (NodeInfo ni : nis){
             tis.add(ni);
+        }
+        return tis;
+    }
+
+    public ArrayList<TextInfo> getCustomTexts(){
+        ArrayList<TextInfo> tis = new ArrayList<TextInfo>();
+        if(conf_scores_for_custom_selector.has(packagename)){
+            Log.v("@getCustomTexts","has packagename custom_selector");
+            JsonObject pcs = conf_scores_for_custom_selector.get(packagename).getAsJsonObject();
+            Set<Map.Entry<String, JsonElement>> entrySet = pcs.entrySet();
+            for(Map.Entry<String,JsonElement> entry : entrySet){
+                String selector = entry.getKey();
+                int score = entry.getValue().getAsInt();
+                Elements els = this.doc.select(selector);
+                for(Element el : els){
+                    if(el.childNodeSize()>1){
+                        continue;
+                    }
+                    TextInfo ti = new TextInfo();
+                    ti.tag = el.tagName();
+                    if(ti.tag.equals("input")){
+                        ti.text = el.hasAttr("value")?el.attr("value"):"";
+                    }else{
+                        ti.text = el.ownText();
+                    }
+                    if(ti.text.length()==0){continue;}
+                    ti.score = score;
+                    tis.add(ti);
+                    Log.v("@ti_getCustomTexts","selector : "+selector+", ti:"+ti.toString());
+                }
+            }
         }
         return tis;
     }

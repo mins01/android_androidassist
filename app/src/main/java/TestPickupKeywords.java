@@ -1,5 +1,8 @@
 
 
+//import android.os.Build;
+//import android.support.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -10,8 +13,9 @@ import com.mins01.java.PickupKeywords.*;
  * Hello world!
  *
  */
-public class App 
+public class TestPickupKeywords
 {
+//	@RequiresApi(api = Build.VERSION_CODES.N)
 	public static void main(String[] args){
 		
 		
