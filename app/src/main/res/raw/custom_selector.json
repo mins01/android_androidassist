@@ -1,0 +1,19 @@
+/*
+"packagename":{
+  "selector":score,
+  ...
+}
+*/
+{
+  // ebay
+ "com.ebay.mobile":{
+   //detail
+   "android_widget_textview.textview_item_name":100,
+   "android_widget_textview.item_subtitle_textview":100,
+   //search result
+   "android_widget_textview.textview_item_title":100,
+   //search word
+   ".primary_toolbar .title":100
+
+ }
+}
