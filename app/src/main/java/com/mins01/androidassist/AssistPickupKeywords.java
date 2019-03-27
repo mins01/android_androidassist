@@ -20,9 +20,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class AssistPickupKeywords extends PickupKeywords {
-    String packagename = "";
-    JsonObject conf_scores_for_packagename  = null;
-    JsonObject conf_scores_for_custom_selector  = null;
+    public String packagename = "";
+    public JsonObject conf_scores_for_packagename  = null;
+    public JsonObject conf_scores_for_custom_selector  = null;
+    public int screenWidth = 0;
+    public int screenHeight = 0;
 
     public AssistPickupKeywords(){
 
@@ -65,6 +67,7 @@ public class AssistPickupKeywords extends PickupKeywords {
         el.attr("data-left", String.valueOf(viewNode.getLeft()));
         el.attr("data-width", String.valueOf(viewNode.getWidth()));
         el.attr("data-height", String.valueOf(viewNode.getHeight()));
+        el.attr("data-score-weight", String.valueOf((((double)viewNode.getWidth()/screenWidth)*(viewNode.getVisibility() != View.VISIBLE?0:1)))); //화면 width 기준으로 view의 width의 비율을 구해서 가중치로 사용.
         if(text.length()>0){
             if(tag.equals("android_webkit_webview")){
                 doc.title(text);
