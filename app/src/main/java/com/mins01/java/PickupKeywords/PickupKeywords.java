@@ -117,6 +117,9 @@ public class PickupKeywords {
 			}
 			
 			syncScore(ti);
+			if(el.hasAttr("data-score-weight")){
+				ti.score *=Double.parseDouble(el.attr("data-score-weight"));
+			}
 //			System.out.println(ti.toString());
 			if(ti.text.length()==0){continue;}
 //			System.out.println(el.tagName()+","+el.text().length()+","+el.childNodeSize()+","+el.childNodeSize()+","+el.text());

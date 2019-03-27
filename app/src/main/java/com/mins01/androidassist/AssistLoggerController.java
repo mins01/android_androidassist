@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -17,7 +18,9 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,8 +61,18 @@ public class AssistLoggerController {
     public ArrayList<TextInfo> lastTis = null;
     public ArrayList<WordInfo> lastWis = null;
     public AssistLoggerController(Context context){
+        //-- 화면 너비 구하기
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int screenWidth = size.x;
+        int screenHeight = size.y;
+
         this.context = context;
         apk = new AssistPickupKeywords();
+        apk.screenWidth = screenWidth;
+        apk.screenHeight = screenHeight;
         apk.init();
 
         apk.conf_scores_for_packagename = loadPkScoresJson();
@@ -121,7 +134,7 @@ public class AssistLoggerController {
 //        System.out.println(doc.html());
 //        System.out.println("=======");
         ArrayList<TextInfo> tis = apk.getTexts();
-        tis.addAll(apk.getCustomTexts());
+//        tis.addAll(apk.getCustomTexts());
         return tis;
     }
     public void onHandleAssist() throws Exception {
