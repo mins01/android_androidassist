@@ -15,5 +15,58 @@
    //search word
    ".primary_toolbar .title":100
 
- }
+
+ },
+
+  // # 11st #
+  "com.elevenst": {   // title에서 중복으로 가져오는 값이 있기 때문에, 다른 클래스들에 -100씩 해줌
+    "android_widget_textview.title" :100,
+    "android_widget_textview.title_text" :500,
+    "android_widget_linearlayout.gridView .text" :-100,
+    "android_widget_linearlayout.gridView .title" :-100,
+    "android_widget_linearlayout.rootView .text" :-100,
+    "android_widget_linearlayout.relates_a_01 " :-100,
+    "android_widget_linearlayout.layout .title" :-100,
+    "android_widget_linearlayout.pui_content.textTitleLayout.titleLayout.title" :-100,
+    "android_widget_linearlayout.textTitleLayout .titleRight" :-100,
+    "android_widget_framelayout.tabsFrame.main_tab_textview":-100,
+    "android_widget_textview.prdNm":-100,
+    "android_widget_textview.main_tab_textview":-100
+  },
+
+  // # coupang #
+  "com.coupang.mobile": {
+    "android_widget_textview.actionDropDownStyle" : 100,
+    "android_widget_relativelayout.item_info_layout .title_text" : 100,
+    "android_widget_textview.allowStacking" :-1,
+    "android_widget_textview.header_title_text" :-1,
+    "android_widget_textview.edit" :-1,
+    "android_widget_textview.delete_all" :-1,
+    "android_widget_textview.coupang_sale_price_info" :-1,
+    "android_widget_textview.discounted_price" : -1,
+    "android_widget_textview.refresh_button" : -1
+  },
+
+  // # Amazon #
+  // nothing to change. Couldn't get any product's datas.
+
+  // # ebay #
+  "com.ebay.mobile" : {
+    "android_widget_textview.textview_header_0":100,
+    "android_widget_textview.trend_topic_title":100,
+    "android_widget_textview.initial_title_textview":100
+  },
+
+  // # Alibaba #
+  "com.alibaba.intl.android.apps.poseidon" : {
+    "android_widget_textview.recommend_product_title" :100,
+    "android_widget_textview.id_name_item_product_info" :100,
+    "android_widget_textview.title_tv_cell_title" :100
+  }
+
+  // # Tmall #
+
+  // # Lazada #
+
+
 }
