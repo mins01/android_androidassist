@@ -136,14 +136,50 @@
   // # SSG #
   // PASS..........
   "kr.co.ssg" : {
-    "android_widget_linearlayout.layout_item1 .text_product_name" :100,
-    "android_widget_linearlayout.layout_item2 .text_product_name" :100,
-    "android_widget_linearlayout.layout_item3 .text_product_name" :100,
+    "android_widget_linearlayout.layout_root .text_product_name" :100,
+//    "android_widget_linearlayout.layout_item2 .text_product_name" :100,
+//    "android_widget_linearlayout.layout_item3 .text_product_name" :100,
     "android_widget_linearlayout.twin_bottom_container > android_widget_textview.textView_product_name" :100,
     "android_widget_linearlayout.middle_layout> android_widget_textview.textView_product_name" :100,
-    "android_widget_textview.result_query_text" : 100   // 검색어
+    "android_widget_textview.result_query_text" : 100,   // 검색어
+    "android_widget_textview.card_banner_main1" :-100,    // 카드 관련 가중치 죽이기
+    "android_widget_textview.card_banner_main2" :-100
+  },
+
+  // # We Make Price
+  "com.wemakeprice" : {
+    "android_widget_textview.deal_list_title" : 100
+  },
+
+  // # Hi Mart #
+  "com.himart.main" : {
+    "android_widget_linearlayout.container .tv_title" : 100,
+    "android_view_viewgroup.container .tv_title" : 100
+  },
+
+  // # InterPark #
+  "com.interpark.shop" : {
+    "android_widget_linearlayout.ll_product_layout .tv_product_title" : 100,
+    "android_widget_linearlayout.rl_root .txt_prd_title": 100
+  },
+
+  // # Ali Express #
+  "com.alibaba.aliexpresshd" : {
+    // Nothing to change.
+  },
+
+  // # Lotte Home shopping #
+  "com.omnitel.android.lottewebview" : {
+    "android_widget_linearlayout.item_container .title" : 100,
+    "android_widget_textview.dual_oneTv_goodsName" : 100,
+    "android_widget_linearlayout.item_container .goods_nm" : 100
+
+    //제품 검색 및 상세 페이지가 웹뷰.
+  },
+
+  // # 현대 Mall #
+  "com.hmallapp" : {
+    // Nothing to change (Web View)
   }
-
-
 
 }
