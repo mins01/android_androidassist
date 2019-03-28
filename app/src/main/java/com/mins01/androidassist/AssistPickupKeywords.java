@@ -51,7 +51,14 @@ public class AssistPickupKeywords extends PickupKeywords {
         wordToLowerCase = true; //강제 소문자 처리
     }
     public Document getDomByViewNode(AssistStructure.ViewNode viewNode){
-        Document doc = Jsoup.parse("<!doctype html><html><head><meta charset=\"utf-8\"></head><body></body></html>", "file://temp/local");
+        Document doc = Jsoup.parse("<!doctype html><html><head><meta charset=\"utf-8\">" +
+                "<style>" +
+                "body *{display:block;box-sizing: border-box; outline:1px dashed #666; position: absolute;}" +
+                "android_widget_edittext{outline:3px inset #abc; background-color:#abc;}"+
+                "android_widget_button{outline: 3px outset #cba; background-color:#cba;}"+
+                "android_widget_imageview,android_widget_image{ background-color:rgba(255,0,0,0.2); border-color:#f99;}"+
+                "</style>" +
+                "</head><body data-visibility=\"1\"></body></html>", "file://temp/local");
         Element p = doc.body();
         appendDom(doc,p,viewNode);
         return doc;
@@ -62,12 +69,33 @@ public class AssistPickupKeywords extends PickupKeywords {
         String contentDescription = viewNode.getContentDescription()!=null?viewNode.getContentDescription().toString():"";
         String tag = (viewNode.getClassName()!=null? viewNode.getClassName() :"view").replace(".","_").toLowerCase();
 
+        int visibility = 1;
+        if(viewNode.getTop()<0 || viewNode.getLeft() < 0
+                //|| viewNode.getTop() > screenHeight || viewNode.getLeft() > screenWidth
+                || viewNode.getVisibility() != View.VISIBLE){
+            visibility = 0;
+        }
+        if(p.attr("data-visibility").equals("0")){ //부모값
+            visibility = 0;
+        }
         Element el = p.appendElement(tag);
         el.attr("data-top", String.valueOf(viewNode.getTop()));
         el.attr("data-left", String.valueOf(viewNode.getLeft()));
         el.attr("data-width", String.valueOf(viewNode.getWidth()));
         el.attr("data-height", String.valueOf(viewNode.getHeight()));
-        el.attr("data-score-weight", String.valueOf((((double)viewNode.getWidth()/screenWidth)*(viewNode.getVisibility() != View.VISIBLE?0:1)))); //화면 width 기준으로 view의 width의 비율을 구해서 가중치로 사용.
+        el.attr("data-score-weight", String.valueOf((((double)viewNode.getWidth()/screenWidth)*(visibility)))); //화면 width 기준으로 view의 width의 비율을 구해서 가중치로 사용.
+        el.attr("data-visibility", String.valueOf(visibility)); //화면 width 기준으로 view의 width의 비율을 구해서 가중치로 사용.
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("top:"+String.valueOf(viewNode.getTop())+"px;");
+        sb.append("left:"+String.valueOf(viewNode.getLeft())+"px;");
+        sb.append("width:"+String.valueOf(viewNode.getWidth())+"px;");
+        sb.append("height:"+String.valueOf(viewNode.getHeight())+"px;");
+        if(visibility==0){
+            sb.append("display:none;");
+        }
+        el.attr("style",sb.toString());
+
         if(text.length()>0){
             if(tag.equals("android_webkit_webview")){
                 doc.title(text);
