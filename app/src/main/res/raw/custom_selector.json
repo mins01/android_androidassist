@@ -59,10 +59,13 @@
     "android_widget_textview.pic_mode_title_waterfall": 100,
     "android_widget_textview.pic_mode_price_promp_waterfall": 0,
     "android_widget_textview.search_input_tag_view_text": 100
+    //Couldn't get product's detail
   },
   // # Lazada #
   "com.lazada.android": {
-    "android_widget_textview.product_title": 100
+    "android_widget_textview.product_title": 100,
+    "android_widget_textview.product_name_text_view" : 100,
+    "android_view_viewgroup.rv_product_info .title" : 100
   },
 
   // # 공구마켓(Market09) #
@@ -73,6 +76,7 @@
   // # Hidden Price #
   "com.wemakeprice.hiddenprice": {
     "android_widget_textview.deal_list_title" : 100
+    // 검색하는 기능이 없음.
   },
 
   // # 당근마켓(towneers)
@@ -89,6 +93,7 @@
     "android_widget_textview.interest_category" :-100,
     "android_widget_textview.Interest_brand" :-100,
     "android_widget_textview.text_name" :100
+    // 제품 상세 설명 페이지는 웹뷰
   },
 
   //G Market
@@ -105,7 +110,8 @@
     "android_widget_textview.tv_item_main_title" : 100,
     "android_widget_relativelayout.v_product_1 .tv_title" : 200,
     "android_widget_textview.item_name" : 100,
-    "android_widget_textview.item_detail_body_goods_name_tv" : 100
+    "android_widget_textview.item_detail_body_goods_name_tv" : 100,
+    "android_widget_textview.keyword_text" : 100
   },
 
   // # E-Mart Mall #
@@ -116,7 +122,9 @@
     "android_widget_linearlayout.layout_item1 .text_product_name" : 100,
     "android_widget_linearlayout.layout_item2 .text_product_name" : 100,
     "android_widget_linearlayout.layout_item3 .text_product_name" : 100,
-    "android_widget_linearlayout.layout_item3 .text_item" : 100   // 검색어
+    "android_widget_linearlayout.layout_item3 .text_item" : 100,
+    "android_widget_textview.result_query_text" : 1000 // 검색어
+
   },
 
   // # CJ Mall #
@@ -131,38 +139,44 @@
   },
 
   // # SSG #
-  // PASS..........
   "kr.co.ssg" : {
     "android_widget_linearlayout.layout_root .text_product_name" :100,
-//    "android_widget_linearlayout.layout_item2 .text_product_name" :100,
-//    "android_widget_linearlayout.layout_item3 .text_product_name" :100,
     "android_widget_linearlayout.twin_bottom_container > android_widget_textview.textView_product_name" :100,
     "android_widget_linearlayout.middle_layout> android_widget_textview.textView_product_name" :100,
-    "android_widget_textview.result_query_text" : 100,   // 검색어
+    "android_widget_textview.result_query_text" : 100,    // 검색어
     "android_widget_textview.card_banner_main1" :-100,    // 카드 관련 가중치 죽이기
-    "android_widget_textview.card_banner_main2" :-100
+    "android_widget_textview.card_banner_main2" :-100     // 카드 관련 가중치 죽이기
   },
 
   // # We Make Price
   "com.wemakeprice" : {
-    "android_widget_textview.deal_list_title" : 100
+    "android_widget_textview.deal_list_title" : 100,
+    "android_widget_edittext.auto_complete_edittext" : 100    //검색어
+    // product detail 페이지는 웹뷰라 가중치 설정 불가.
   },
 
   // # Hi Mart #
   "com.himart.main" : {
     "android_widget_linearlayout.container .tv_title" : 100,
-    "android_view_viewgroup.container .tv_title" : 100
+    "android_view_viewgroup.container .tv_title" : 100,
+    "android_widget_linearlayout.viewgroup_search_result > android_widget_linearlayout > android_widget_linearlayout > android_widget_horizontalscrollview > android_widget_linearlayout > android_widget_textview" : 100
+    // There's no searching keyword's class. So, Trace linked tags. (검색어)
+    // product detail 페이지는 웹뷰라 가중치 설정이 불가.
+    // Couldn't invest a weighting about searching keyword because it was shown on webview.
   },
 
   // # InterPark #
   "com.interpark.shop" : {
     "android_widget_linearlayout.ll_product_layout .tv_product_title" : 100,
-    "android_widget_linearlayout.rl_root .txt_prd_title": 100
+    "android_widget_linearlayout.rl_root .txt_prd_title": 100,
+    "android_widget_textview.tv_search" : 100 // 검색어
+    // product detail page == Web View ~> Couldn't invest a weighting about searching keyword.
   },
 
   // # Ali Express #
   "com.alibaba.aliexpresshd" : {
-    // Nothing to change.
+    "android_view_viewgroup.toolbar_actionbar > android_widget_textview" : 100,    // class가 없어서 태그 추적 (검색어)
+    "android_widget_textview.view_product_title" : 100  // 상품 상세 페이지의 상품명
   },
 
   // # Lotte Home shopping #
@@ -171,15 +185,16 @@
     "android_widget_textview.dual_oneTv_goodsName" : 100,
     "android_widget_linearlayout.item_container .goods_nm" : 100
 
-    //제품 검색 및 상세 페이지가 웹뷰.
+    //제품 검색 및 상세 페이지가 웹뷰. ~> 가중치 설정 X
   },
 
   // # 현대 Mall #
   "com.hmallapp" : {
-    // Nothing to change (Web View)
+    "android_widget_edittext.toolbar_main_search_text" : 100      // 검색어
+    // 상품 상세 페이지는 웹뷰 ~> 가중치 설정 X
   },
 
-  // # 쇼핑중독 #
+  // # 할인중독 #
   "com.jasonmg.salepoison":{
     "android_widget_textview": -50,
     "android_widget_relativelayout.headLine_info_rl > android_widget_textview.subject_tv":150,
