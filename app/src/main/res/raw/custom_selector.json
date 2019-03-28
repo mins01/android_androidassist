@@ -112,12 +112,35 @@
   },
 
   // # E-Mart Mall #
-  // Pass... 상당히 까다로움
   "kr.co.emart.emartmall" : {
     "android_widget_relativelayout.layout_item .textView_product_name" : 100,
     "android_widget_textview.tabTitle" : -100,
-    "android_widget_relativelayout.layout_item .layout_flow_tag > android_widget_textview" : 100
+    "android_widget_relativelayout.layout_item .layout_flow_tag > android_widget_textview" : 100,
+    "android_widget_linearlayout.layout_item1 .text_product_name" : 100,
+    "android_widget_linearlayout.layout_item2 .text_product_name" : 100,
+    "android_widget_linearlayout.layout_item3 .text_product_name" : 100,
+    "android_widget_linearlayout.layout_item3 .text_item" : 100   // 검색어
+  },
 
+  // # CJ Mall #
+  "com.cjoshppingphone" : {
+    "android_widget_relativelayout.row_layout .first_product_title" : 100,
+    "android_widget_relativelayout.row_layout .second_product_title" : 100,
+    "android_widget_relativelayout.row_layout .third_product_title" : 100,
+    "android_widget_linearlayout.product_layout .product_title" : 100,
+    "android_view_viewgroup.live_product_viewpager .product_title" : 100,
+    "android_widget_linearlayout.product_info_layout .product_title" :100
+    // 웹뷰라 검색어 가중치 설정이 불가..
+  },
+
+  // # SSG #
+  // PASS..........
+  "kr.co.ssg" : {
+    "android_widget_linearlayout.layout_item1 .text_product_name" :100,
+    "android_widget_linearlayout.layout_item2 .text_product_name" :100,
+    "android_widget_linearlayout.layout_item3 .text_product_name" :100,
+    "android_widget_linearlayout.twin_bottom_container > android_widget_textview.textView_product_name" :100,
+    "android_widget_textview.result_query_text" : 100
   }
 
 }
