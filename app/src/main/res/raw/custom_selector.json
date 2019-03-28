@@ -140,7 +140,10 @@
     "android_widget_linearlayout.layout_item2 .text_product_name" :100,
     "android_widget_linearlayout.layout_item3 .text_product_name" :100,
     "android_widget_linearlayout.twin_bottom_container > android_widget_textview.textView_product_name" :100,
-    "android_widget_textview.result_query_text" : 100
+    "android_widget_linearlayout.middle_layout> android_widget_textview.textView_product_name" :100,
+    "android_widget_textview.result_query_text" : 100   // 검색어
   }
+
+
 
 }
