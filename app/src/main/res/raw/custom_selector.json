@@ -180,6 +180,21 @@
   // # 현대 Mall #
   "com.hmallapp" : {
     // Nothing to change (Web View)
+  },
+
+  // # 쇼핑중독 #
+  "com.jasonmg.salepoison":{
+    "android_widget_textview": -50,
+    "android_widget_relativelayout.headLine_info_rl > android_widget_textview.subject_tv":150,
+    "android_widget_linearlayout.top_ll > * > android_widget_textview.subject_tv":150
+  },
+  // # 지그재그 #
+  "com.croquis.zigzag":{
+    "android_widget_textview": -50,
+    "android_view_viewgroup.goods_list > android_widget_linearlayout > android_widget_textview.title":150,
+    "android_widget_textview.name_text":150,
+    "android_widget_edittext.search_edit_text":150,
+    "android_widget_imageview.goods_image + android_widget_textview.name_text":150
   }
 
 }
