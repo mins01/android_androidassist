@@ -134,7 +134,7 @@ public class AssistLoggerController {
 //        System.out.println(doc.html());
 //        System.out.println("=======");
         ArrayList<TextInfo> tis = apk.getTexts();
-//        tis.addAll(apk.getCustomTexts());
+        tis.addAll(apk.getCustomTexts());
         return tis;
     }
     public void onHandleAssist() throws Exception {
