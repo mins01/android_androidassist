@@ -41,27 +41,24 @@
     "android_widget_textview.delete_all": -1,
     "android_widget_textview.coupang_sale_price_info": -1,
     "android_widget_textview.discounted_price": -1,
-    "android_widget_textview.refresh_button": -1
+    "android_widget_textview.refresh_button": -1,
+    "android_widget_textview.name_text" : 100
   },
   // # Amazon #
   // nothing to change. Couldn't get any product's datas.
 
-  // # ebay #
-  "com.ebay.mobile": {
-    "android_widget_textview.textview_header_0": 100,
-    "android_widget_textview.trend_topic_title": 100,
-    "android_widget_textview.initial_title_textview": 100
-  },
   // # Alibaba #
   "com.alibaba.intl.android.apps.poseidon": {
     "android_widget_textview.recommend_product_title": 100,
     "android_widget_textview.id_name_item_product_info": 100,
-    "android_widget_textview.title_tv_cell_title": 100
+    "android_widget_textview.title_tv_cell_title": 100,
+    "android_widget_textview.id_title_tv_view_search_finder_action_bar": 1000
   },
   // # Tmall #
   "com.tmall.wireless": {
     "android_widget_textview.pic_mode_title_waterfall": 100,
-    "android_widget_textview.pic_mode_price_promp_waterfall": 0
+    "android_widget_textview.pic_mode_price_promp_waterfall": 0,
+    "android_widget_textview.search_input_tag_view_text": 100
   },
   // # Lazada #
   "com.lazada.android": {
