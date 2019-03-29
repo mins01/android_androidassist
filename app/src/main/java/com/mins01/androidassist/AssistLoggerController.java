@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 
@@ -185,7 +186,7 @@ public class AssistLoggerController {
     }
     public void openSearchActivity(){
         Intent intent = new Intent(context,SearchActivity.class);
-        intent.setFlags(FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_SINGLE_TOP);
 //        Bundle extras = intent.getExtras();
 //        extras.putExtra("tis",lastNis);
         intent.putExtra("tis",lastTis);
