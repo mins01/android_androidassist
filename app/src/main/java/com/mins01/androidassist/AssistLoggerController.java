@@ -63,19 +63,19 @@ public class AssistLoggerController {
     public ArrayList<NodeInfo> lastNis = null;
     public ArrayList<TextInfo> lastTis = null;
     public ArrayList<WordInfo> lastWis = null;
+    public AssistStructure.WindowNode asw;
     public AssistLoggerController(Context context){
-        //-- 화면 너비 구하기
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenWidth = size.x;
-        int screenHeight = size.y;
+//        //-- 화면 너비 구하기
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        Display display = wm.getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int screenWidth = size.x;
+//        int screenHeight = size.y;
 
         this.context = context;
         apk = new AssistPickupKeywords();
-        apk.screenWidth = screenWidth;
-        apk.screenHeight = screenHeight;
+
         apk.init();
 
         apk.conf_scores_for_packagename = loadPkScoresJson();
@@ -105,6 +105,10 @@ public class AssistLoggerController {
         this.structure = structure;
         this.content = content;
         if(structure != null){
+            asw = structure.getWindowNodeAt(0);
+            apk.screenWidth = asw.getWidth();
+            apk.screenHeight = asw.getHeight();
+
             packagename = structure.getActivityComponent().getPackageName();
             apk.packagename = packagename;
             ((TextView)view_assist_main.findViewById(R.id.tvPackagename)).setText(packagename);
@@ -118,19 +122,19 @@ public class AssistLoggerController {
         if(structure == null){
             throw new Exception("structure is null");
         }
-//        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+//        Document doc = apk.getDomByViewNode(asw.getRootViewNode());
 //        Log.v("@doc",doc.html());
 //        apk.setHTML(doc.html());
 //        System.out.println("=======");
 //        System.out.println(doc.html());
 //        System.out.println("=======");
-        return apk.getNodeInfoByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+        return apk.getNodeInfoByViewNode(asw.getRootViewNode());
     }
     public ArrayList<TextInfo> getTisFromStructure(AssistStructure structure) throws Exception {
         if(structure == null){
             throw new Exception("structure is null");
         }
-        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+        Document doc = apk.getDomByViewNode(asw.getRootViewNode());
         Log.v("@doc",doc.html());
         apk.setHTML(doc.html());
 //        System.out.println("=======");
