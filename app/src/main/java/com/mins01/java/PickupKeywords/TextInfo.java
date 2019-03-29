@@ -1,6 +1,8 @@
 package com.mins01.java.PickupKeywords;
 
-public class TextInfo {
+import java.io.Serializable;
+
+public class TextInfo  implements Serializable {
 	public String tag="";
 	public String text="";
 	public double score=0;

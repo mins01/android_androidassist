@@ -23,6 +23,11 @@
                 <!--<category android:name="android.intent.category.DEFAULT"/>-->
             <!--</intent-filter>-->
         </activity>
+        <activity android:name=".SearchActivity" android:label="search">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <!-- 어시스트 서비스 등록 -->
         <service android:name="com.mins01.androidassist.AssistLoggerService"

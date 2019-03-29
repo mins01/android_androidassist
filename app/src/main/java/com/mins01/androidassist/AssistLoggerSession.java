@@ -22,6 +22,7 @@ public class AssistLoggerSession extends VoiceInteractionSession {
         this.context = context;
 //        alc.context = context;
         alc = new AssistLoggerController(context);
+        alc.voiceInteractionSession = (VoiceInteractionSession) this;
         Log.v("@AssistLoggerSession","AssistLoggerSession");
     }
 
