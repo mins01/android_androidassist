@@ -196,7 +196,7 @@
 
   // # chrome mobile #
   "com.android.chrome":{
-    "android_widget_edittext.url_bar":-1000
+    "android_widget_edittext.url_bar":-100
   }
 
 }
