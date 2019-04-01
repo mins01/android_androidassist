@@ -185,6 +185,9 @@ public class AssistPickupKeywords extends PickupKeywords {
                     if(el.childNodeSize()>1){
                         continue;
                     }
+                    if(el.hasAttr("data-visibility") && el.attr("data-visibility").equals("0")){ //invisibility skip
+                        continue;
+                    }
                     TextInfo ti = new TextInfo();
                     ti.tag = el.tagName();
                     if(ti.tag.equals("input")){
