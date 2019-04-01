@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.service.voice.VoiceInteractionSession;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mins01.java.PickupKeywords.TextInfo;
@@ -45,10 +47,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 
 public class AssistLoggerController {
-
+    protected VoiceInteractionSession voiceInteractionSession;
     public Bundle data;
     public AssistStructure structure;
     public AssistContent content;
@@ -60,19 +64,19 @@ public class AssistLoggerController {
     public ArrayList<NodeInfo> lastNis = null;
     public ArrayList<TextInfo> lastTis = null;
     public ArrayList<WordInfo> lastWis = null;
+    public AssistStructure.WindowNode asw;
     public AssistLoggerController(Context context){
-        //-- 화면 너비 구하기
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int screenWidth = size.x;
-        int screenHeight = size.y;
+//        //-- 화면 너비 구하기
+//        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+//        Display display = wm.getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int screenWidth = size.x;
+//        int screenHeight = size.y;
 
         this.context = context;
         apk = new AssistPickupKeywords();
-        apk.screenWidth = screenWidth;
-        apk.screenHeight = screenHeight;
+
         apk.init();
 
         apk.conf_scores_for_packagename = loadPkScoresJson();
@@ -102,6 +106,10 @@ public class AssistLoggerController {
         this.structure = structure;
         this.content = content;
         if(structure != null){
+            asw = structure.getWindowNodeAt(0);
+            apk.screenWidth = asw.getWidth();
+            apk.screenHeight = asw.getHeight();
+
             packagename = structure.getActivityComponent().getPackageName();
             apk.packagename = packagename;
             ((TextView)view_assist_main.findViewById(R.id.tvPackagename)).setText(packagename);
@@ -115,19 +123,19 @@ public class AssistLoggerController {
         if(structure == null){
             throw new Exception("structure is null");
         }
-//        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+//        Document doc = apk.getDomByViewNode(asw.getRootViewNode());
 //        Log.v("@doc",doc.html());
 //        apk.setHTML(doc.html());
 //        System.out.println("=======");
 //        System.out.println(doc.html());
 //        System.out.println("=======");
-        return apk.getNodeInfoByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+        return apk.getNodeInfoByViewNode(asw.getRootViewNode());
     }
     public ArrayList<TextInfo> getTisFromStructure(AssistStructure structure) throws Exception {
         if(structure == null){
             throw new Exception("structure is null");
         }
-        Document doc = apk.getDomByViewNode(structure.getWindowNodeAt(0).getRootViewNode());
+        Document doc = apk.getDomByViewNode(asw.getRootViewNode());
         Log.v("@doc",doc.html());
         apk.setHTML(doc.html());
 //        System.out.println("=======");
@@ -167,6 +175,27 @@ public class AssistLoggerController {
                     }
                 }
         );
+        view_assist_main.findViewById(R.id.btnOpenSearchActivity).setOnClickListener(
+                new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        openSearchActivity();
+                    }
+                }
+        );
+    }
+    public void openSearchActivity(){
+        Intent intent = new Intent(context,SearchActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_SINGLE_TOP);
+//        Bundle extras = intent.getExtras();
+//        extras.putExtra("tis",lastNis);
+        intent.putExtra("tis",lastTis);
+        intent.putExtra("wis",lastWis);
+//        intent.putExtra("tis",lastTis);
+        context.startActivity(intent);
+
+
+        voiceInteractionSession.finish();
     }
     public void actPickupKeyWords() throws Exception {
 //        ArrayList<NodeInfo> nis = getNisFromStructure(structure);

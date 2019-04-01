@@ -207,6 +207,11 @@
     "android_widget_textview.name_text":150,
     "android_widget_edittext.search_edit_text":150,
     "android_widget_imageview.goods_image + android_widget_textview.name_text":150
+  },
+
+  // # chrome mobile #
+  "com.android.chrome":{
+    "android_widget_edittext.url_bar":-100
   }
 
 }

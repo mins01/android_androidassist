@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class PickupKeywords {
 	public Document doc = null;
-	public String jsonString_conf_scores = "{\"h1\":50,\"h2\":40,\"h3\":30,\"h4\":20,\"h5\":10,\"h6\":10,\"title\":50,\"span\":5,\"a\":1,\"li\":5,\"input\":50,\"meta-description\":25,\"meta-keywords\":25,\"meta-og:title\":25,\"meta-og:description\":25,\"script\":0,\"style\":0}";
+	public String jsonString_conf_scores = "{\"h1\":50,\"h2\":40,\"h3\":30,\"h4\":20,\"h5\":10,\"h6\":10,\"title\":100,\"span\":5,\"a\":1,\"li\":5,\"input\":50,\"meta-description\":25,\"meta-keywords\":25,\"meta-og:title\":25,\"meta-og:description\":25,\"script\":0,\"style\":0}";
 //	public String userAgent = "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Mobile Safari/537.36"; //android
 	public String userAgent = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"; //PC-windows
 	public JsonObject conf_scores = null;
