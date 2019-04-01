@@ -212,6 +212,15 @@
   // # chrome mobile #
   "com.android.chrome":{
     "android_widget_edittext.url_bar":-100
+  },
+
+  // # 유튜브 #
+  "com.google.android.youtube":{
+    ".inline_muted_metadata .title":100, //main
+    ".video_metadata_layout .title":100, //view
+    ".video_info_view .title":100, //searched lists
+    ".search_query":100 //search words
+
   }
 
 }
